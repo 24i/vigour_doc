@@ -8,19 +8,25 @@ $ npm install vigour-doc
 ```
 
 ## usage
-Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc` on a specific file:
+Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc`
+
+- on a specific file:
 
 ```sh
-$ vdoc <filePath>
+$ vdoc --path <filePath>
 ```
 
-or recursively on a directory
+- or recursively on a directory:
 
 ```sh
-$ vdoc <dirPath>
+$ vdoc --path <dirPath>
 ```
 
-if `dirPath` is not specified, it will run on the current working directory (`./`)
+if `path` is not specified, it will run on the current working directory (same as `--path .`)
+
+```sh
+$ vdoc
+```
 
 <a name="plugins">
 ## [badges]()
@@ -34,11 +40,11 @@ if `dirPath` is not specified, it will run on the current working directory (`./
 #### example
 *<p align="center">README.md</p>*
 ```gfm
-<!-- VDOC.badges travis({branch:master}), standard, npm -->
+<!-- VDOC.badges travis({"branch":"master"}), standard, npm -->
 ```
 <p align="center">↓</p>
 ```gfm
-<!-- VDOC.badges travis({branch:master}), standard, npm -->
+<!-- VDOC.badges travis({"branch":"master"}), standard, npm -->
 <!-- DON'T EDIT THIS SECTION (including comments), INSTEAD RE-RUN `vdoc` TO UPDATE -->
 [![Build Status](https://travis-ci.org/vigour-io/doc.svg?branch=master)](https://travis-ci.org/vigour-io/doc)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
