@@ -32,7 +32,7 @@ if `dirPath` is not specified, it will run on the current working directory (`./
 - **options** : (optional) JSON options for plugin
 
 #### example
-<p align="center" style="font-style: italic;">README.md</p>
+*<p align="center">README.md</p>*
 ```gfm
 <!-- VDOC.badges travis({branch:master}), standard, npm -->
 ```
@@ -62,7 +62,7 @@ Fetches the jsdoc-style comment block containing `@id <ID>`, converts it to gith
 - **ID** : Identifier to find the desired comment block
 
 #### example
-<p align="center" style="font-style: italic;">lib/start.js</p>
+*<p align="center">lib/start.js</p>*
 ```javascript
 /**
  * @id start
@@ -71,7 +71,7 @@ Fetches the jsdoc-style comment block containing `@id <ID>`, converts it to gith
  */
 module.exports = exports = function start () {
 ```
-<p align="center" style="font-style: italic;">README.md</p>
+*<p align="center">README.md</p>*
 ```gfm
 <!-- VDOC.jsdoc start -->
 ```
