@@ -46,12 +46,7 @@ if `dirPath` is not specified, it will run on the current working directory (`./
 <!-- VDOC END -->
 ```
 
-#### available badges
-
-- `travis({branch:<branch>})`
-- `standard`
-- `npm`
-- more coming soon, stay tuned!
+See [vigour-doc-badges](https://github.com/vigour-io/doc-badges) for available badges
 
 ## [jsdoc]()
 Fetches the jsdoc-style comment block containing `@id <ID>`, converts it to github-flavoured markdown, and replaces the placeholder with the result
