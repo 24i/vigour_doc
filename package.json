@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A collection of tools to help make great docs with minimal effort",
   "main": "lib/",
+  "bin": {
+    "vdoc": "./bin/vdoc"
+  },
   "dependencies": {},
   "devDependencies": {
     "tape": "^4.5.1"
