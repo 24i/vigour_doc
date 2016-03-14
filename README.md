@@ -41,10 +41,9 @@ produces
 
 ### [jsdoc]()
 ```md
-<!-- VDOCS.jsdoc <filePath> <ID>  -->
+<!-- VDOCS.jsdoc <ID>  -->
 ```
 
-- **filePath** : path to file with jsdoc-style comments
 - **ID** : Identifier to find the desired comment block
 
 **example**
