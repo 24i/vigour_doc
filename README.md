@@ -1,3 +1,5 @@
+*This repo is still in design phase and is currently unusable. Please check back later!*
+
 # vigour-docs
 A collection of tools to help make great docs with minimal effort
 
