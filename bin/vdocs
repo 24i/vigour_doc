@@ -1,6 +1,0 @@
-#!/usr/bin/env node
-'use strict'
-
-var Docs = require('../')
-var docs = new Docs()
-docs.start()

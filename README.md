@@ -1,54 +1,85 @@
 *This repo is still in design phase and is currently unusable. Please check back later!*
 
-# vigour-docs
+# vigour-doc
 A collection of tools to help make great docs with minimal effort
 
-`npm install vigour-docs` (coming soon)
+```sh
+$ npm install vigour-doc
+```
 
-## Usage
-Opt-in to certain behaviours by including placeholder comments in your `.md` files. Then:
+## usage
+Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc` on a specific file:
 
 ```sh
-$ vdocs
+$ vdoc <filePath>
 ```
 
-## Behaviours
+or recursively on a directory
 
-### [badges]()
-```md
-<!-- VDOCS.badges <name>[(options)], ...  -->
+```sh
+$ vdoc <dirPath>
 ```
 
-**example**
-```md
-<!-- VDOCS.badges travis({branch:master}), standard, npm -->
+if `dirPath` is not specified, it will run on the current working directory (`./`)
+
+<a name="plugins">
+## [badges]()
+```gfm
+<!-- VDOC.badges <name>(options), ...  -->
 ```
 
-produces
+- **name** : name of plugin
+- **options** : (optional) JSON options for plugin
 
-```md
-[![Build Status](https://travis-ci.org/vigour-io/docs.svg?branch=master)](https://travis-ci.org/vigour-io/docs)
+#### example
+<p align="center">*README.md*</p>
+```gfm
+<!-- VDOC.badges travis({branch:master}), standard, npm -->
+```
+<p align="center">↓</p>
+```gfm
+<!-- VDOC.badges travis({branch:master}), standard, npm -->
+<!-- DON'T EDIT THIS SECTION (including comments), INSTEAD RE-RUN `vdoc` TO UPDATE -->
+[![Build Status](https://travis-ci.org/vigour-io/doc.svg?branch=master)](https://travis-ci.org/vigour-io/doc)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![npm version](https://badge.fury.io/js/vigour-docs.svg)](https://badge.fury.io/js/vigour-docs)
+[![npm version](https://badge.fury.io/js/vigour-doc.svg)](https://badge.fury.io/js/vigour-doc)
+<!-- VDOC END -->
 ```
 
-#### Available badges
+#### available badges
 
 - `travis({branch:<branch>})`
 - `standard`
 - `npm`
 - more coming soon, stay tuned!
 
-### [jsdoc]()
+## [jsdoc]()
+Fetches the jsdoc-style comment block containing `@id <ID>`, converts it to github-flavoured markdown, and replaces the placeholder with the result
 ```md
-<!-- VDOCS.jsdoc <ID>  -->
+<!-- VDOC.jsdoc <ID>  -->
 ```
 
 - **ID** : Identifier to find the desired comment block
 
-**example**
-
-```md
-<!-- VDOCS.jsdoc lib/start.js 1 -->
+#### example
+<p align="center">*lib/start.js*</p>
+```javascript
+/**
+ * @id start
+ * @function start
+ * Searches the directory recursively and updates any vdoc sections
+ */
+module.exports = exports = function start () {
 ```
-Fetches the jsdoc-style comment block found in `lib/start.js` and containing `@id 1`, converts it to github-flavoured markdown, and replaces the placeholder with the result
+<p align="center">*README.md*</p>
+```gfm
+<!-- VDOC.jsdoc start -->
+```
+<p align="center">↓</p>
+```gfm
+<!-- VDOC.jsdoc start -->
+<!-- DON'T EDIT THIS SECTION (including comments), INSTEAD RE-RUN `vdoc` TO UPDATE -->
+**function** start
+Searches the directory recursively and updates any vdoc sections
+<!-- VDOC END -->
+```

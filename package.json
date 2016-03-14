@@ -1,5 +1,5 @@
 {
-  "name": "vigour-docs",
+  "name": "vigour-doc",
   "version": "1.0.0",
   "description": "A collection of tools to help make great docs with minimal effort",
   "main": "lib/",
@@ -12,21 +12,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vigour-io/docs.git"
+    "url": "git+https://github.com/vigour-io/doc.git"
   },
   "keywords": [
     "vigour",
+    "doc",
     "docs",
     "documentation",
-    "jsdoc",
-    "badges"
+    "badges",
+    "jsdoc"
   ],
   "author": "Vigour <dev@vigour.io>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vigour-io/docs/issues"
+    "url": "https://github.com/vigour-io/doc/issues"
   },
-  "homepage": "https://github.com/vigour-io/docs#readme",
+  "homepage": "https://github.com/vigour-io/doc#readme",
   "contributors": [
     "Shawn Inder <shawn@vigour.io"
   ],
