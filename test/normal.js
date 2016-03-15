@@ -2,6 +2,7 @@
 
 var path = require('path')
 var test = require('tape')
+var _merge = require('lodash.merge')
 var fs = require('vigour-fs-promised')
 var setup = require('./setup')
 var commentFactory = require('./commentfactory')
@@ -38,63 +39,46 @@ var options = {
   'two.js': {
     extraDir: 'sub2',
     comment: commentFactory('two', idTwo)
-  },
-  tmpDir: tmpDir
+  }
 }
-var expectedOptions = {
-  'README.md': {
-    badges: expectedBadges,
-    jsdocs: expectedJsdocsOne
-  },
-  'another.md': {
-    extraDir: 'sub',
-    badges: expectedBadges,
-    jsdocs: expectedJsdocsTwo
-  },
-  'one.js': {
-    extraDir: 'sub',
-    comment: commentFactory('one', idOne)
-  },
-  'two.js': {
-    extraDir: 'sub2',
-    comment: commentFactory('two', idTwo)
-  },
-  tmpDir: expectedTmpDir
-}
-setup(options)
+var expectedOptions = _merge(options)
+expectedOptions['README.md'].badges = expectedBadges
+expectedOptions['README.md'].jsdocs = expectedJsdocsOne
+expectedOptions['another.md'].badges = expectedBadges
+expectedOptions['another.md'].jsdocs = expectedJsdocsTwo
+setup(options, tmpDir)
   .then(() => {
-    return setup(expectedOptions)
+    return setup(expectedOptions, expectedTmpDir)
   })
   .then(() => {
-    test('vdoc', function (t) {
-      t.plan(Object.keys(options).length - 1) // -1 for the `tmpDir` key
+    test('vdoc', { timeout: 5000 }, function (t) {
+      t.plan(Object.keys(options).length)
       var vdoc = new Vdoc({ wd: tmpDir })
-      vdoc.start().then(() => {
-        return compareFiles(t, options, expectedOptions)
-      })
-      .catch((reason) => {
-        console.error(':(', reason)
-      })
+      return vdoc.start()
+        .then(() => {
+          return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
+        })
+        .catch((reason) => {
+          console.error('normal :(', reason)
+        })
     })
-    test.onFinish(setup.teardown(options.tmpDir, expectedOptions.tmpDir))
+    test.onFinish(() => {
+      return setup.teardown(tmpDir, expectedTmpDir)
+    })
   })
 
-function compareFiles (t, observed, expected) {
+function compareFiles (t, tmpDir, observed, expectedTmpDir, expected) {
   var proms = []
   for (let key in observed) {
-    if (key !== 'tmpDir') {
-      observed[key].tmpDir = observed.tmpDir
-      expected[key].tmpDir = expected.tmpDir
-      proms.push(filesMatch(t, key, observed[key], expected[key]))
-    }
+    proms.push(filesMatch(t, key, tmpDir, observed[key], expectedTmpDir, expected[key]))
   }
   return Promise.all(proms)
 }
 
-function filesMatch (t, key, observed, expected) {
+function filesMatch (t, key, tmpDir, observed, expectedTmpDir, expected) {
   return Promise.all([
-    fs.readFileAsync(path.join(observed.tmpDir, key)),
-    fs.readFileAsync(path.join(expected.tmpDir, key))
+    fs.readFileAsync(path.join(tmpDir, observed.extraDir || '', key), 'utf8'),
+    fs.readFileAsync(path.join(expectedTmpDir, expected.extraDir || '', key), 'utf8')
   ]).then((contents) => {
     t.equals(contents[0], contents[1], key + " doesn't match")
   })

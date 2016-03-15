@@ -12,6 +12,7 @@
     "vigour-fs-promised": "^2.0.1"
   },
   "devDependencies": {
+    "lodash.merge": "^4.3.2",
     "tape": "^4.5.1"
   },
   "scripts": {
