@@ -2,6 +2,7 @@
 
 var path = require('path')
 var test = require('tape')
+var fs = require('vigour-fs-promised')
 var setup = require('./setup')
 var commentFactory = require('./commentfactory')
 var expectedCommentFactory = require('./expectedCommentfactory')
@@ -66,11 +67,35 @@ setup(options)
   })
   .then(() => {
     test('vdoc', function (t) {
-      t.plan(1)
+      t.plan(Object.keys(options).length - 1) // -1 for the `tmpDir` key
       var vdoc = new Vdoc({ wd: tmpDir })
       vdoc.start().then(() => {
-        t.equals(true, true, 'mock assertion to test setup and teardown')
+        return compareFiles(t, options, expectedOptions)
+      })
+      .catch((reason) => {
+        console.error(':(', reason)
       })
     })
     test.onFinish(setup.teardown(options.tmpDir, expectedOptions.tmpDir))
   })
+
+function compareFiles (t, observed, expected) {
+  var proms = []
+  for (let key in observed) {
+    if (key !== 'tmpDir') {
+      observed[key].tmpDir = observed.tmpDir
+      expected[key].tmpDir = expected.tmpDir
+      proms.push(filesMatch(t, key, observed[key], expected[key]))
+    }
+  }
+  return Promise.all(proms)
+}
+
+function filesMatch (t, key, observed, expected) {
+  return Promise.all([
+    fs.readFileAsync(path.join(observed.tmpDir, key)),
+    fs.readFileAsync(path.join(expected.tmpDir, key))
+  ]).then((contents) => {
+    t.equals(contents[0], contents[1], key + " doesn't match")
+  })
+}
