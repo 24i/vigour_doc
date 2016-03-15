@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "lodash.template": "^4.2.2",
+    "vigour-config": "^0.1.0",
     "vigour-fs-promised": "^2.0.1"
   },
   "devDependencies": {
@@ -39,10 +40,9 @@
   ],
   "engines": {},
   "vigour": {
-    "path": {
-      "val": ".",
-      "description": "Path of the file (or directory) to (recursively) process",
-      "env": "VDOC_PATH"
+    "wd": {
+      "val": false,
+      "description": "Working directory. Where to look for `.md` files. Default to `cwd` (`process.cwd()`)"
     }
   }
 }
