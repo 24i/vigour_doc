@@ -8,25 +8,7 @@ $ npm install vigour-doc
 ```
 
 ## usage
-Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc`
-
-- on a specific file:
-
-```sh
-$ vdoc --path <filePath>
-```
-
-- or recursively on a directory:
-
-```sh
-$ vdoc --path <dirPath>
-```
-
-if `path` is not specified, it will run on the current working directory (same as `--path .`)
-
-```sh
-$ vdoc
-```
+Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc` (see [vigour-config docs](https://github.com/vigour-io/config#readme))
 
 <a name="plugins">
 ## [badges]()
