@@ -4,12 +4,14 @@ var path = require('path')
 var fs = require('vigour-fs-promised')
 var _template = require('lodash.template')
 var templateDir = path.join(__dirname, 'templates')
-var tmpDir = path.join(__dirname, 'tmp')
 
 module.exports = exports = function (options) {
   var proms = []
   for (let key in options) {
-    proms.push(exports.prepFile(key, options[key]))
+    if (key !== 'tmpDir') {
+      options[key].tmpDir = options.tmpDir
+      proms.push(exports.prepFile(key, options[key]))
+    }
   }
   return Promise.all(proms).catch((reason) => {
     console.error(':(', reason)
@@ -17,7 +19,12 @@ module.exports = exports = function (options) {
 }
 
 exports.teardown = function () {
-  return fs.removeAsync(tmpDir)
+  var removes = []
+  var len = arguments.length
+  for (let i = 0; i < len; i += 1) {
+    removes.push(fs.removeAsync(arguments[i]))
+  }
+  return Promise.all(removes)
 }
 
 exports.prepFile = function (fileName, options) {
@@ -25,7 +32,7 @@ exports.prepFile = function (fileName, options) {
     .then((contents) => {
       var template = _template(contents)
       var newContents = template(options)
-      var filePath = path.join(tmpDir,
+      var filePath = path.join(options.tmpDir,
           (options.extraDir ? options.extraDir : ''),
           fileName)
       return fs.writeFileAsync(filePath,
