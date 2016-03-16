@@ -46,26 +46,29 @@ expectedOptions['README.md'].badges = expectedBadges
 expectedOptions['README.md'].jsdocs = expectedJsdocsOne
 expectedOptions['another.md'].badges = expectedBadges
 expectedOptions['another.md'].jsdocs = expectedJsdocsTwo
-setup(options, tmpDir)
-  .then(() => {
-    return setup(expectedOptions, expectedTmpDir)
-  })
-  .then(() => {
-    test('vdoc', function (t) {
-      t.plan(Object.keys(options).length)
-      var vdoc = new Vdoc({ wd: tmpDir })
-      return vdoc.start()
-        .then(() => {
-          return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
-        })
-        .catch((reason) => {
-          console.error('normal :(', reason)
-        })
+test('setup', function (t) {
+  setup(options, tmpDir)
+    .then(() => {
+      return setup(expectedOptions, expectedTmpDir)
     })
-    test.onFinish(() => {
-      return setup.teardown(tmpDir, expectedTmpDir)
+    .then(() => {
+      t.end()
     })
-  })
+})
+test('vdoc', function (t) {
+  t.plan(Object.keys(options).length)
+  var vdoc = new Vdoc({ wd: tmpDir })
+  return vdoc.start()
+    .then(() => {
+      return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
+    })
+    .catch((reason) => {
+      console.error('normal :(', reason)
+    })
+})
+test.onFinish(() => {
+  return setup.teardown(tmpDir, expectedTmpDir)
+})
 
 function compareFiles (t, tmpDir, observed, expectedTmpDir, expected) {
   var proms = []
