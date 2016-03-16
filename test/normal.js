@@ -2,7 +2,7 @@
 
 var path = require('path')
 var test = require('tape')
-var _merge = require('lodash.merge')
+var _cloneDeep = require('lodash.clonedeep')
 var fs = require('vigour-fs-promised')
 var setup = require('./setup')
 var commentFactory = require('./commentfactory')
@@ -41,7 +41,7 @@ var options = {
     comment: commentFactory('two', idTwo)
   }
 }
-var expectedOptions = _merge(options)
+var expectedOptions = _cloneDeep(options)
 expectedOptions['README.md'].badges = expectedBadges
 expectedOptions['README.md'].jsdocs = expectedJsdocsOne
 expectedOptions['another.md'].badges = expectedBadges
