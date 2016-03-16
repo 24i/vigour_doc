@@ -6,7 +6,7 @@ var _merge = require('lodash.merge')
 var fs = require('vigour-fs-promised')
 var setup = require('./setup')
 var commentFactory = require('./commentfactory')
-var expectedCommentFactory = require('./expectedCommentfactory')
+var expectedCommentFactory = require('./expectedcommentfactory')
 var Vdoc = require('../')
 
 var tmpDir = path.join(__dirname, 'tmp')
