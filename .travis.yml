@@ -1,0 +1,13 @@
+# .travis.yml
+language: node_js
+node_js:
+  - '5.4'
+  - '4.4'
+after_script:
+  - npm run coveralls
+branches:
+  except:
+    - /^v[0-9]/
+  only:
+    - master
+    - develop
