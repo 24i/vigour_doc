@@ -51,7 +51,7 @@ setup(options, tmpDir)
     return setup(expectedOptions, expectedTmpDir)
   })
   .then(() => {
-    test('vdoc', { timeout: 5000 }, function (t) {
+    test('vdoc', function (t) {
       t.plan(Object.keys(options).length)
       var vdoc = new Vdoc({ wd: tmpDir })
       return vdoc.start()
