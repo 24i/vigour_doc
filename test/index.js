@@ -1,6 +1,6 @@
 'use strict'
 
-require('./normal')
-require('./errors')
 require('./getjsdocblocks')
 require('./hasmdplaceholders')
+require('./normal')
+require('./errors')
