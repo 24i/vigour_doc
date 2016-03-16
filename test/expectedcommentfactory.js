@@ -1,5 +1,4 @@
 'use strict'
-
 module.exports = exports = function (fnName, id) {
   return `
 **id** ${id}
