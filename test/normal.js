@@ -83,6 +83,6 @@ function filesMatch (t, key, tmpDir, observed, expectedTmpDir, expected) {
     fs.readFileAsync(path.join(tmpDir, observed.extraDir || '', key), 'utf8'),
     fs.readFileAsync(path.join(expectedTmpDir, expected.extraDir || '', key), 'utf8')
   ]).then((contents) => {
-    t.equals(contents[0], contents[1], key + " doesn't match")
+    t.equals(contents[0], contents[1], key + ' matches expectation')
   })
 }
