@@ -1,5 +1,5 @@
 'use strict'
-module.exports = exports = function (fnName, id) {
+module.exports = exports = function expectedCommentFactory (fnName, id) {
   return `
 **id** ${id}
 

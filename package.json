@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "lodash.clonedeep": "^4.3.1",
+    "lodash.filter": "^4.2.1",
     "tape": "^4.5.1"
   },
   "scripts": {

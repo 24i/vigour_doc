@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = exports = function (fnName, id) {
+module.exports = exports = function commentFactory (fnName, id) {
   return `/**
  * @id ${id}
  * @function ${fnName}
