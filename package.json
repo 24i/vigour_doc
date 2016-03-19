@@ -7,8 +7,11 @@
     "vdoc": "./bin/vdoc"
   },
   "dependencies": {
+    "lodash.merge": "^4.3.2",
     "lodash.template": "^4.2.2",
+    "lodash.trim": "^4.2.0",
     "vigour-config": "^0.1.0",
+    "vigour-doc-badges": "^1.0.0",
     "vigour-fs-promised": "^2.0.1"
   },
   "devDependencies": {

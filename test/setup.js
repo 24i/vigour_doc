@@ -11,9 +11,6 @@ module.exports = exports = function setup (options, tmpDir) {
     proms.push(exports.prepFile(key, options[key], tmpDir))
   }
   return Promise.all(proms)
-    .catch((reason) => {
-      console.error('setup :(', reason)
-    })
 }
 
 exports.prepFile = function prepFile (fileName, options, tmpDir) {

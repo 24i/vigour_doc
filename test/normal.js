@@ -13,7 +13,7 @@ var tmpDir = path.join(__dirname, 'tmp')
 var expectedTmpDir = path.join(__dirname, 'expected')
 var idOne = 'whatever'
 var idTwo = 'whatever-else'
-var badges = '<!-- VDOC.badges travis({"branch":"master"}), standard, npm -->'
+var badges = '<!-- VDOC.badges travis; standard; npm -->'
 var expectedBadges = badges + Vdoc.prototype.mdCommentStart + `
 [![Build Status](https://travis-ci.org/vigour-io/doc.svg?branch=master)](https://travis-ci.org/vigour-io/doc)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -46,15 +46,18 @@ expectedOptions['README.md'].badges = expectedBadges
 expectedOptions['README.md'].jsdocs = expectedJsdocsOne
 expectedOptions['another.md'].badges = expectedBadges
 expectedOptions['another.md'].jsdocs = expectedJsdocsTwo
-test('setup', function (t) {
-  setup(options, tmpDir)
+
+test('setup', { timeout: 5000 }, function (t) {
+  return setup(options, tmpDir)
     .then(() => {
       return setup(expectedOptions, expectedTmpDir)
     })
     .then(() => {
       t.end()
     })
+    .catch(catchErrors)
 })
+
 test('vdoc', function (t) {
   t.plan(Object.keys(options).length)
   var vdoc = new Vdoc({ wd: tmpDir })
@@ -62,10 +65,9 @@ test('vdoc', function (t) {
     .then(() => {
       return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
     })
-    .catch((reason) => {
-      console.error('normal :(', reason)
-    })
+    .catch(catchErrors)
 })
+
 test.onFinish(() => {
   return setup.teardown(tmpDir, expectedTmpDir)
 })
@@ -85,4 +87,11 @@ function filesMatch (t, key, tmpDir, observed, expectedTmpDir, expected) {
   ]).then((contents) => {
     t.equals(contents[0], contents[1], key + ' matches expectation')
   })
+}
+
+function catchErrors (reason) {
+  var msg = reason.stack
+    ? reason.stack
+    : reason
+  console.error(':(', msg)
 }

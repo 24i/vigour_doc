@@ -13,7 +13,7 @@ Opt-in to certain behaviors by including placeholder comments in your `.md` file
 <a name="plugins">
 ## [badges]()
 ```gfm
-<!-- VDOC.badges <name>(options), ...  -->
+<!-- VDOC.badges <name>(options); ...  -->
 ```
 
 - **name** : name of plugin
@@ -22,11 +22,11 @@ Opt-in to certain behaviors by including placeholder comments in your `.md` file
 #### example
 *<p align="center">README.md</p>*
 ```gfm
-<!-- VDOC.badges travis({"branch":"master"}), standard, npm -->
+<!-- VDOC.badges travis; standard; npm -->
 ```
 <p align="center">↓</p>
 ```gfm
-<!-- VDOC.badges travis({"branch":"master"}), standard, npm -->
+<!-- VDOC.badges travis; standard; npm -->
 <!-- DON'T EDIT THIS SECTION (including comments), INSTEAD RE-RUN `vdoc` TO UPDATE -->
 [![Build Status](https://travis-ci.org/vigour-io/doc.svg?branch=master)](https://travis-ci.org/vigour-io/doc)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
