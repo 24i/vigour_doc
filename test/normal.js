@@ -63,6 +63,11 @@ test('vdoc', function (t) {
   var vdoc = new Vdoc({ wd: tmpDir })
   return vdoc.start()
     .then(() => {
+      // Running vdoc twice (or any number of times)
+      // should produce exactly the same result as running it once
+      return vdoc.start()
+    })
+    .then(() => {
       return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
     })
     .catch(catchErrors)
