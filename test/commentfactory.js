@@ -9,6 +9,6 @@ module.exports = exports = function commentFactory (fnName, id) {
  * @param {number} amount
  * @param {boolean} isCool - always \`true\`
  * @param {array} things All sorts of things
- * @returns \`undefined\`, \`void 0\`, \`this.meh\`, you name it!
+ * @returns {boolean} canMakeYouHappy - usually \`true\`
  */`
 }

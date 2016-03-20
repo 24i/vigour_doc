@@ -19,9 +19,9 @@ var expectedBadges = badges + Vdoc.prototype.mdCommentStart + `
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![npm version](https://badge.fury.io/js/vigour-doc.svg)](https://badge.fury.io/js/vigour-doc)` + Vdoc.prototype.mdCommentEnd
 var jsdocsOne = '<!-- VDOC.jsdoc ' + idOne + ' -->'
-var expectedJsdocsOne = jsdocsOne + Vdoc.prototype.mdCommentStart + expectedCommentFactory('one', idOne) + Vdoc.prototype.mdCommentEnd
+var expectedJsdocsOne = jsdocsOne + Vdoc.prototype.mdCommentStart + '\n' + expectedCommentFactory('one', idOne) + Vdoc.prototype.mdCommentEnd
 var jsdocsTwo = '<!-- VDOC.jsdoc ' + idTwo + ' -->'
-var expectedJsdocsTwo = jsdocsTwo + Vdoc.prototype.mdCommentStart + expectedCommentFactory('two', idTwo) + Vdoc.prototype.mdCommentEnd
+var expectedJsdocsTwo = jsdocsTwo + Vdoc.prototype.mdCommentStart + '\n' + expectedCommentFactory('two', idTwo) + Vdoc.prototype.mdCommentEnd
 var options = {
   'README.md': {
     badges: badges,
