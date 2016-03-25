@@ -20,9 +20,28 @@ var block2 = `/**
 var expected2 = {}
 expected2[randomChars] = block2
 
+var idA = 'idA'
+var idB = 'idB'
+var block3a = `/**
+ * @id ${idA}
+ * @function heyhey
+ */`
+
+var block3b = `/**
+ * @id ${idB}
+ * @property hey
+ */`
+
+var block3 = block3a + `\n\n\n` + block3b
+
+var expected3 = {}
+expected3[idA] = block3a
+expected3[idB] = block3b
+
 var testCases = [
   [ block1, expected1 ],
-  [ block2, expected2 ]
+  [ block2, expected2 ],
+  [ block3, expected3 ]
 ]
 
 var len = testCases.length
