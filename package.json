@@ -16,12 +16,18 @@
     "vigour-jsdoc2md": "^1.0.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
     "lodash.clonedeep": "^4.3.1",
     "lodash.filter": "^4.2.1",
+    "tap-spec": "^4.1.1",
     "tape": "^4.5.1"
   },
   "scripts": {
-    "test": "tape test"
+    "test": "node test/index.js | tap-spec",
+    "cover": "istanbul cover --report none --print detail test/index.js",
+    "view-cover": "istanbul report html && open ./coverage/index.html",
+    "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,5 @@
+<!-- VDOC.badges travis; standard; npm; coveralls -->
+
 # vigour-doc
 A collection of tools to help make great docs with minimal effort
 
