@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/vigour-io/doc.svg?branch=master)](https://travis-ci.org/vigour-io/doc)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![npm version](https://badge.fury.io/js/vigour-doc.svg)](https://badge.fury.io/js/vigour-doc)
+[![Coverage Status](https://coveralls.io/repos/github/vigour-io/doc/badge.svg?branch=master)](https://coveralls.io/github/vigour-io/doc?branch=master)
+
 # vigour-doc
 A collection of tools to help make great docs with minimal effort
 
