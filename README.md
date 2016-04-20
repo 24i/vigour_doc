@@ -13,6 +13,10 @@ $ npm install vigour-doc
 ## usage
 Opt-in to certain behaviors by including placeholder comments in your `.md` files. Then, run `vdoc` (see [vigour-config docs](https://github.com/vigour-io/config#readme))
 
+```sh
+$ vdoc
+```
+
 <a name="plugins">
 ## [badges]()
 ```gfm
