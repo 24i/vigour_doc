@@ -17,6 +17,13 @@ Opt-in to certain behaviors by including placeholder comments in your `.md` file
 $ vdoc
 ```
 
+### clean
+Cleans the generated content on files. **Important** it's necessary to pass true because of a small bug on [vigour-config](https://github.com/vigour-io/config/issues/18)
+
+```sh
+$ vdoc --clean true
+```
+
 <a name="plugins">
 ## [badges]()
 ```gfm

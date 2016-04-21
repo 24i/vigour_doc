@@ -47,10 +47,23 @@ expectedOptions['README.md'].jsdocs = expectedJsdocsOne
 expectedOptions['another.md'].badges = expectedBadges
 expectedOptions['another.md'].jsdocs = expectedJsdocsTwo
 
-test('setup', { timeout: 5000 }, function (t) {
+test('vdoc', function (t) {
   return setup(options, tmpDir)
     .then(() => {
       return setup(expectedOptions, expectedTmpDir)
+    })
+    .then(() => {
+      var vdoc = new Vdoc({ wd: tmpDir })
+      return vdoc.start()
+        .then(() => {
+          // Running vdoc twice (or any number of times)
+          // should produce exactly the same result as running it once
+          return vdoc.start()
+        })
+        .then(() => {
+          return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
+        })
+        .catch(catchErrors)
     })
     .then(() => {
       t.end()
@@ -58,17 +71,24 @@ test('setup', { timeout: 5000 }, function (t) {
     .catch(catchErrors)
 })
 
-test('vdoc', function (t) {
-  t.plan(Object.keys(options).length)
-  var vdoc = new Vdoc({ wd: tmpDir })
-  return vdoc.start()
+test('clean', function (t) {
+  return setup(options, tmpDir)
     .then(() => {
-      // Running vdoc twice (or any number of times)
-      // should produce exactly the same result as running it once
-      return vdoc.start()
+      return setup(options, expectedTmpDir)
     })
     .then(() => {
-      return compareFiles(t, tmpDir, options, expectedTmpDir, expectedOptions)
+      var vdoc = new Vdoc({ wd: tmpDir })
+      return vdoc.start()
+        .then(() => {
+          vdoc.config.set({ clean: true })
+          return vdoc.start()
+        })
+        .then(() => {
+          return compareFiles(t, tmpDir, options, expectedTmpDir, options)
+        })
+    })
+    .then(() => {
+      t.end()
     })
     .catch(catchErrors)
 })
