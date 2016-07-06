@@ -22,6 +22,8 @@ var jsdocsOne = '<!-- VDOC.jsdoc ' + idOne + ' -->'
 var expectedJsdocsOne = jsdocsOne + Vdoc.prototype.mdCommentStart + '\n' + expectedCommentFactory('one', idOne) + Vdoc.prototype.mdCommentEnd
 var jsdocsTwo = '<!-- VDOC.jsdoc ' + idTwo + ' -->'
 var expectedJsdocsTwo = jsdocsTwo + Vdoc.prototype.mdCommentStart + '\n' + expectedCommentFactory('two', idTwo) + Vdoc.prototype.mdCommentEnd
+var leftovers = Vdoc.prototype.mdCommentStart + '\nwhatever' + Vdoc.prototype.mdCommentEnd
+var expectedLeftovers = ''
 var options = {
   'README.md': {
     badges: badges,
@@ -30,7 +32,8 @@ var options = {
   'another.md': {
     extraDir: 'sub',
     badges: badges,
-    jsdocs: jsdocsTwo
+    jsdocs: jsdocsTwo,
+    leftovers: leftovers
   },
   'one.js': {
     extraDir: 'sub',
@@ -46,6 +49,10 @@ expectedOptions['README.md'].badges = expectedBadges
 expectedOptions['README.md'].jsdocs = expectedJsdocsOne
 expectedOptions['another.md'].badges = expectedBadges
 expectedOptions['another.md'].jsdocs = expectedJsdocsTwo
+expectedOptions['another.md'].leftovers = expectedLeftovers
+
+var cleanOptions = _cloneDeep(options)
+cleanOptions['another.md'].leftovers = ''
 
 test('vdoc', function (t) {
   return setup(options, tmpDir)
@@ -74,7 +81,7 @@ test('vdoc', function (t) {
 test('clean', function (t) {
   return setup(options, tmpDir)
     .then(() => {
-      return setup(options, expectedTmpDir)
+      return setup(cleanOptions, expectedTmpDir)
     })
     .then(() => {
       var vdoc = new Vdoc({ wd: tmpDir })
